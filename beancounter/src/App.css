@@ -2,6 +2,12 @@
   text-align: center;
 }
 
+* {
+  min-width: 0;
+  --font-size: calc(10px + 2vmin);
+  font-size: var(--font-size);
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -20,8 +26,35 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: var(--font-size);
   color: white;
+}
+
+#pointinput {
+  display: grid;
+  grid-template-areas:
+  "... pp pm pg ..."
+  "rst vp vm vg vs"
+  "... mp mm mg ...";
+}
+#pointinput *{
+  width: 3em;
+}
+#rst {grid-area: rst;}
+#pp {grid-area: pp;}
+#pm {grid-area: pm;}
+#pg {grid-area: pg;}
+#vp {grid-area: vp;}
+#vm {grid-area: vm;}
+#vg {grid-area: vg;}
+#vs {grid-area: vs;}
+#mp {grid-area: mp;}
+#mm {grid-area: mm;}
+#mg {grid-area: mg;}
+
+input {
+  width: 3em;
+  font-size: var(--font-size);
 }
 
 .App-link {
