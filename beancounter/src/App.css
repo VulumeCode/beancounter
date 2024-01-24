@@ -32,25 +32,45 @@
 
 #pointinput {
   display: grid;
+  gap:0.5em;
   grid-template-areas:
-  "... pp pm pg ..."
-  "rst vp vm vg vs"
-  "... mp mm mg ...";
+  "... pp pm ... ..."
+  "rst vp vm vs vs"
+  "... mp mm ... ...";
+  grid-auto-columns: 3em;
 }
-#pointinput *{
+/* #pointinput>*{
   width: 3em;
-}
+} */
 #rst {grid-area: rst;}
 #pp {grid-area: pp;}
 #pm {grid-area: pm;}
-#pg {grid-area: pg;}
 #vp {grid-area: vp;}
 #vm {grid-area: vm;}
-#vg {grid-area: vg;}
 #vs {grid-area: vs;}
 #mp {grid-area: mp;}
 #mm {grid-area: mm;}
-#mg {grid-area: mg;}
+#pointinput button {
+  background: #0002;
+  border: none;
+  color: white;
+}
+
+span.coin {
+  display: inline-block;
+  height: 1.4em;
+  width: 1.4em;
+  line-height: 1.2em;
+  border-radius: 50%;
+  border-width: 2pt;
+  border-style: solid;
+  border-color: white;
+  background-color: transparent;
+  text-align: center;
+  font-size: 0.7em;
+  vertical-align: text-bottom;
+}
+
 
 input {
   width: 3em;
