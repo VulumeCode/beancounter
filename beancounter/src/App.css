@@ -50,10 +50,15 @@
 #vs {grid-area: vs;}
 #mp {grid-area: mp;}
 #mm {grid-area: mm;}
-#pointinput button {
+
+button {
   background: #0002;
   border: none;
   color: white;
+}
+
+button.liable.enabled {
+  border: 2pt solid #fff;
 }
 
 span.coin {
@@ -64,7 +69,8 @@ span.coin {
   border-radius: 50%;
   border-width: 2pt;
   border-style: solid;
-  border-color: white;
+  border-color: #fff;
+  opacity: 0.3;
   background-color: transparent;
   text-align: center;
   font-size: 0.7em;
