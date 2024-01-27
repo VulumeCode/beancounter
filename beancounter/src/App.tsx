@@ -28,9 +28,9 @@ const makePlayer = (name: string): Player => {
 function App() {
   const [game, set_game] = useImmer<Game>({
     players: [
-      makePlayer("Vincent"),
-      makePlayer("Emily"),
-      makePlayer("Jules"),
+      makePlayer("AAA"),
+      makePlayer("BBB"),
+      makePlayer("CCC"),
     ]
   });
 
@@ -50,21 +50,37 @@ function App() {
       <header className="App-header">
         {
           game.players.map((player, i) =>
-            <div
+            <div className="player"
               key={i}
-            >{player.name}: {player.score} <Coin>Pt</Coin>
-
-              <button
+            ><div className="name">{player.name}: {player.score} <Coin>Pt</Coin></div>
+              <div><button
                 className={"liable" + (player.liable ? " enabled" : " ")}
                 onClick={() => set_game((draft) => { draft.players[i].liable = !player.liable })}>Lose
-              </button>
+              </button></div>
+
               {
                 player.liable &&
                 <>
-                  <button>
+                  <button
+                    className={"liable_mult x2_1" + (player.dups > 0 ? " enabled" : " ")}
+                    onClick={() => set_game((draft) => {
+                      if (player.dups === 0) {
+                        draft.players[i].dups++;
+                      } else {
+                        draft.players[i].dups--;
+                      }
+                    })}>
                     <Coin>×2</Coin>
                   </button>
-                  <button>
+                  <button
+                    className={"liable_mult x2_2" + (player.dups > 1 ? " enabled" : " ")}
+                    onClick={() => set_game((draft) => {
+                      if (player.dups <= 1) {
+                        draft.players[i].dups++;
+                      } else {
+                        draft.players[i].dups--;
+                      }
+                    })}>
                     <Coin>×2</Coin>
                   </button>
                 </>
@@ -75,17 +91,20 @@ function App() {
                 <button
                   className={"pay"}
                   onClick={() => set_game((draft) => {
+                    let gain = 0;
                     draft.players.forEach(p => {
-                          if (p.liable) {
-                            p.score -= score;
-                            p.liable = false;
-                            p.dups = 0;
-                          }
-                        }
-                      )
-                    draft.players[i].score += (liables.length * score);
+                      if (p.liable) {
+                        const loss = score * (2 ** p.dups);
+                        gain += loss;
+                        p.score -= loss;
+                        p.liable = false;
+                        p.dups = 0;
+                      }
+                    }
+                    )
+                    draft.players[i].score += gain;
                   })}
-                  >
+                >
                   Pay
                 </button>
               }

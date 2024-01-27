@@ -30,6 +30,17 @@
   color: white;
 }
 
+
+.player {
+  display: grid;
+  gap:0.5em;
+  grid-template-areas: "name name b1 b2 b2 ";
+  grid-auto-columns: 3em;
+  margin-bottom: 0.5em;
+}
+.player>.name {grid-area: name;}
+
+
 #pointinput {
   display: grid;
   gap:0.5em;
@@ -57,8 +68,8 @@ button {
   color: white;
 }
 
-button.liable.enabled {
-  border: 2pt solid #fff;
+button.enabled {
+  outline: 2pt solid #fff;
 }
 
 span.coin {
