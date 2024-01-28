@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import './App.css';
 
 
 import { useImmer } from "use-immer";
+import Modal from "./components/Modal/Modal";
 
 type Player = {
   name: string;
@@ -57,13 +58,6 @@ function App() {
     par_score: 88,
   });
 
-  const [points, set_points] = useState<number>(0);
-  const [dups, set_dups] = useState<number>(0);
-  const initScore = () => {
-    set_points(0);
-    set_dups(0);
-  }
-
   const undo = () => {
     set_game((draft) => {
       const h = draft.undos.pop();
@@ -83,9 +77,19 @@ function App() {
     })
   }
 
+  const [points, set_points] = useState<number>(0);
+  const [dups, set_dups] = useState<number>(0);
+  const initScore = () => {
+    set_points(0);
+    set_dups(0);
+  }
+
   const score = calcScore(points, dups);
   const liables = game.players.filter(p => p.liable);
   const someoneIsLiable = liables.length > 0;
+
+  const [isOpen, set_isOpen] = useState<boolean>(false);
+
 
   return (
     <div className="App">
@@ -93,20 +97,20 @@ function App() {
         <div id="backgroundColor">
         </div>
       </div>
-      <header className="App-header">
+      <div className="beancounter">
         <div className="menu">
 
-          <button
-            onClick={undo}>↩</button>
-          <button
+          <button onClick={undo}>↩</button>
+          {/* <button
             onClick={() => {
               const name = window.prompt("Enter name")
               if (!!name) {
                 set_game((draft) => { draft.players.push(makePlayer(name)) })
               }
-            }}>☰</button>
+            }}>☰</button> */}
           <button
-            onClick={redo}>↪</button>
+            onClick={() => set_isOpen(true)}>☰</button>
+          <button onClick={redo}>↪</button>
         </div>
         <div className="players">
           {
@@ -115,7 +119,8 @@ function App() {
                 key={i}
               >
                 {/* <div className="name">{player.name}: </div> */}
-                <img alt="" className="icon" src={icons[i%12]}/>
+                <div className="name">
+                  <img alt="" className="icon" src={icons[i % 12]} />: </div>
                 <div className="points">{game.par_score + player.score} <CoinPoints /></div>
                 <div><button
                   className={"liable" + (player.liable ? " enabled" : " ")}
@@ -192,7 +197,15 @@ function App() {
 
           <div id="vs"> = {score} <CoinPoints /></div>
         </div>
-      </header>
+      </div>
+      <Modal
+        isOpen={isOpen}
+        hasCloseBtn={true}
+        onClose={() => set_isOpen(false)}>
+        <div>
+          blablabla
+        </div>
+      </Modal>
     </div>
   );
 }

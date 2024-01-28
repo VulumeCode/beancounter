@@ -1,19 +1,18 @@
-
 body {
   margin: 0;
 }
 
 
 * {
-  font-family:  'Iosevka Slab Web', sans-serif;
+  font-family: 'Iosevka Slab Web', sans-serif;
   /* font-weight: 800; */
 
   min-width: 0;
   --font-size: calc(10px + 2vmin);
   font-size: var(--font-size);
 
-  text-align: center; 
- 
+  text-align: center;
+
   --purple: #4F3752;
   --brown: #FEA13C;
   --yellow: #FCD504;
@@ -24,36 +23,36 @@ body {
 }
 
 #backgroundNoise {
-position: absolute;
-z-index: -1; 
+  position: absolute;
+  z-index: -1;
   background: url(noise.svg);
-  background-size: cover;  
+  background-size: cover;
 }
 
 #backgroundColor {
   background-color: #3F3939;
-  mix-blend-mode: multiply;  
-  
+  mix-blend-mode: multiply;
+
   width: 100vw;
   height: 100VH;
 }
 
 .App {
-   justify-content: center;
+  justify-content: center;
   display: flex;
 }
 
-.App-header {
+.beancounter {
   --margin: 1.5em;
   margin: var(--margin);
   height: calc(100vh - (2* var(--margin)));
 
-  outline:  calc((var(--margin)/2)) solid var(--wrapperRed);
+  outline: calc((var(--margin)/2)) solid var(--wrapperRed);
   box-shadow: -1px -1px 15px black;
 
   background-color: var(--white);
 
-  
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -72,43 +71,73 @@ z-index: -1;
 
 .player {
   display: grid;
-  gap:0.5em;
+  gap: 0.5em;
   grid-template-areas: "name points b1 b2 b2 ";
   grid-auto-columns: 3em;
   margin-bottom: 0.5em;
 
   /* background-color: var(--red); */
 }
-.player>.name {grid-area: name;}
-.player>.icon {
-  grid-area: name;
 
+.player>.name {
+  grid-area: name;
+}
+
+.icon {
   width: var(--font-size);
   object-fit: contain;
+  /* box-shadow: 0 0 0 2pt var(--purple); */
 }
-.player>.points {grid-area: points;}
+
+.player>.points {
+  grid-area: points;
+}
 
 
 #pointinput {
   display: grid;
-  gap:0.5em;
+  gap: 0.5em;
   grid-template-areas:
-  "... pp pm ... ..."
-  "rst vp vm vs vs"
-  "... mp mm ... ...";
+    "... pp pm ... ..."
+    "rst vp vm vs vs"
+    "... mp mm ... ...";
   grid-auto-columns: 3em;
 }
+
 /* #pointinput>*{
   width: 3em;
 } */
-#rst {grid-area: rst;}
-#pp {grid-area: pp;}
-#pm {grid-area: pm;}
-#vp {grid-area: vp;}
-#vm {grid-area: vm;}
-#vs {grid-area: vs;}
-#mp {grid-area: mp;}
-#mm {grid-area: mm;}
+#rst {
+  grid-area: rst;
+}
+
+#pp {
+  grid-area: pp;
+}
+
+#pm {
+  grid-area: pm;
+}
+
+#vp {
+  grid-area: vp;
+}
+
+#vm {
+  grid-area: vm;
+}
+
+#vs {
+  grid-area: vs;
+}
+
+#mp {
+  grid-area: mp;
+}
+
+#mm {
+  grid-area: mm;
+}
 
 button {
   background: var(--brown);
@@ -128,11 +157,11 @@ span.coin {
   border-radius: 50%;
 
   color: var(--purple);
-  box-shadow: 0 0 0 2pt var(--purple), 
-                        0 0 0 5pt var(--yellow) ;
+  box-shadow: 0 0 0 2pt var(--purple),
+    0 0 0 5pt var(--yellow);
   /* outline: 2pt solid var(--purple); */
   background-color: var(--yellow);
-  
+
   text-align: center;
   font-size: 0.7em;
   vertical-align: text-bottom;
