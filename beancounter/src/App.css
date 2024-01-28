@@ -1,44 +1,86 @@
-.App {
-  text-align: center;
+
+body {
+  margin: 0;
 }
 
+
 * {
+  font-family:  'Iosevka Slab Web', sans-serif;
+  /* font-weight: 800; */
+
   min-width: 0;
   --font-size: calc(10px + 2vmin);
   font-size: var(--font-size);
+
+  text-align: center; 
+ 
+  --purple: #4F3752;
+  --brown: #FEA13C;
+  --yellow: #FCD504;
+  --red: #FD2E3C;
+  --white: #F4F4F4;
+  --wrapperRed: #B44A32;
+  --black: #332E2B;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#backgroundNoise {
+position: absolute;
+z-index: -1; 
+  background: url(noise.svg);
+  background-size: cover;  
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+#backgroundColor {
+  background-color: #3F3939;
+  mix-blend-mode: multiply;  
+  
+  width: 100vw;
+  height: 100VH;
+}
+
+.App {
+   justify-content: center;
+  display: flex;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+  --margin: 1.5em;
+  margin: var(--margin);
+  height: calc(100vh - (2* var(--margin)));
+
+  outline:  calc((var(--margin)/2)) solid var(--wrapperRed);
+  box-shadow: -1px -1px 15px black;
+
+  background-color: var(--white);
+
+  
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   font-size: var(--font-size);
-  color: white;
+  color: var(--black);
+  width: fit-content;
+
 }
 
+.menu {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
 
 .player {
   display: grid;
   gap:0.5em;
-  grid-template-areas: "name name b1 b2 b2 ";
+  grid-template-areas: "name points b1 b2 b2 ";
   grid-auto-columns: 3em;
   margin-bottom: 0.5em;
+
+  /* background-color: var(--red); */
 }
 .player>.name {grid-area: name;}
+.player>.points {grid-area: points;}
 
 
 #pointinput {
@@ -63,13 +105,13 @@
 #mm {grid-area: mm;}
 
 button {
-  background: #0002;
+  background: var(--brown);
   border: none;
-  color: white;
+  color: var(--black);
 }
 
 button.enabled {
-  outline: 2pt solid #fff;
+  outline: 2pt solid var(--black);
 }
 
 span.coin {
@@ -78,11 +120,13 @@ span.coin {
   width: 1.4em;
   line-height: 1.2em;
   border-radius: 50%;
-  border-width: 2pt;
-  border-style: solid;
-  border-color: #fff;
-  opacity: 0.3;
-  background-color: transparent;
+
+  color: var(--purple);
+  box-shadow: 0 0 0 2pt var(--purple), 
+                        0 0 0 5pt var(--yellow) ;
+  /* outline: 2pt solid var(--purple); */
+  background-color: var(--yellow);
+  
   text-align: center;
   font-size: 0.7em;
   vertical-align: text-bottom;
@@ -92,17 +136,4 @@ span.coin {
 input {
   width: 3em;
   font-size: var(--font-size);
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

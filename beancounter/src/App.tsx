@@ -1,9 +1,8 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useState } from "react";
 import './App.css';
 
 
 import { useImmer } from "use-immer";
-// import { produce } from "immer";
 
 type Player = {
   name: string;
@@ -14,12 +13,14 @@ type Player = {
 
 type Game = {
   players: Player[];
+
+  par_score: number;
 }
 
 const makePlayer = (name: string): Player => {
   return {
     name,
-    score: 88,
+    score: 0,
     liable: false,
     dups: 0,
   }
@@ -31,7 +32,8 @@ function App() {
       makePlayer("AAA"),
       makePlayer("BBB"),
       makePlayer("CCC"),
-    ]
+    ],
+    par_score: 88,
   });
 
   const [points, set_points] = useState<number>(0);
@@ -47,12 +49,42 @@ function App() {
 
   return (
     <div className="App">
+      <div id="backgroundNoise">
+        <div id="backgroundColor">
+        </div>
+      </div>
       <header className="App-header">
+        <div className="menu">
+
+          <div
+            onClick={() => {
+              const name = window.prompt("Enter name")
+              if (!!name) {
+                set_game((draft) => { draft.players.push(makePlayer(name)) })
+              }
+            }}>↩</div>          
+          <div
+            onClick={() => {
+              const name = window.prompt("Enter name")
+              if (!!name) {
+                set_game((draft) => { draft.players.push(makePlayer(name)) })
+              }
+            }}>☰</div>          
+          <div
+            onClick={() => {
+              const name = window.prompt("Enter name")
+              if (!!name) {
+                set_game((draft) => { draft.players.push(makePlayer(name)) })
+              }
+            }}>↪</div>
+        </div>
+        <div className="players">
         {
           game.players.map((player, i) =>
             <div className="player"
               key={i}
-            ><div className="name">{player.name}: {player.score} <Coin>Pt</Coin></div>
+            ><div className="name">{player.name}: </div>
+              <div className="points">{game.par_score + player.score} <CoinPoints /></div>
               <div><button
                 className={"liable" + (player.liable ? " enabled" : " ")}
                 onClick={() => set_game((draft) => { draft.players[i].liable = !player.liable })}>Lose
@@ -70,7 +102,7 @@ function App() {
                         draft.players[i].dups--;
                       }
                     })}>
-                    <Coin>×2</Coin>
+                    <CoinDups/>
                   </button>
                   <button
                     className={"liable_mult x2_2" + (player.dups > 1 ? " enabled" : " ")}
@@ -81,7 +113,7 @@ function App() {
                         draft.players[i].dups--;
                       }
                     })}>
-                    <Coin>×2</Coin>
+                    <CoinDups/>
                   </button>
                 </>
               }
@@ -110,33 +142,30 @@ function App() {
               }
             </div>
           )
-        }
-        <div>---</div>
-        <div
-          onClick={() => {
-            const name = window.prompt("Enter name")
-            if (!!name) {
-              set_game((draft) => { draft.players.push(makePlayer(name)) })
-            }
-          }}>Add player+</div>
-        <div>---</div>
+          }
+          </div>
+
         <div id="pointinput">
           <button id="rst" onClick={initScore}>↺</button>
 
           <button id="pp" onClick={() => set_points(points + 1)}>▲</button>
-          <div id="vp">{points} <Coin>Pt</Coin></div>
+          <div id="vp">{points} <CoinPoints/></div>
           <button id="mp" onClick={() => set_points(points - 1)} disabled={points < 1}>▼</button>
 
           <button id="pm" onClick={() => set_dups(dups + 1)}>▲</button>
-          <div id="vm">{dups} <Coin>×2</Coin></div>
+          <div id="vm">{dups} <CoinDups/></div>
           <button id="mm" onClick={() => set_dups(dups - 1)} disabled={dups < 1}>▼</button>
 
-          <div id="vs"> = {score} <Coin>Pt</Coin></div>
+          <div id="vs"> = {score} <CoinPoints/></div>
         </div>
       </header>
     </div>
   );
 }
+
+const  CoinPoints = () => <Coin>§</Coin>
+const  CoinDups = () => <Coin>×2</Coin>
+
 
 function Coin(props: { children: string }) {
   return (<span className="coin">{props.children}</span>);
