@@ -80,6 +80,12 @@ z-index: -1;
   /* background-color: var(--red); */
 }
 .player>.name {grid-area: name;}
+.player>.icon {
+  grid-area: name;
+
+  width: var(--font-size);
+  object-fit: contain;
+}
 .player>.points {grid-area: points;}
 
 
