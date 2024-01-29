@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import './App.css';
 
-
+import bean from './bean.svg'
 import { useImmer } from "use-immer";
 import Modal from "./components/Modal/Modal";
 
@@ -210,11 +210,11 @@ function App() {
   );
 }
 
-const CoinPoints = () => <Coin>§</Coin>
+const CoinPoints = () => <Coin><img src={ bean} alt="" className="bean"/></Coin>
 const CoinDups = () => <Coin>×2</Coin>
 
 
-function Coin(props: { children: string }) {
+function Coin(props: { children: any }) {
   return (<span className="coin">{props.children}</span>);
 }
 

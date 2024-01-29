@@ -167,6 +167,11 @@ span.coin {
   vertical-align: text-bottom;
 }
 
+.bean {
+  width: 0.9em;
+  rotate: -45deg;
+  translate: 0.05em 0.09em;
+}
 
 input {
   width: 3em;
