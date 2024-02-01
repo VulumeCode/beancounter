@@ -14,13 +14,13 @@ body {
   text-align: center;
 
   --purple: #a37fad;
-  --brown: #ca7805;
-  --yellow: #a78d00;
+  --brown: #FEA13C;
+  --yellow: #FCD504;
   --red: #FD2E3C;
   --white: #F4F4F4;
   --wrapperRed: #b44a32;
   --black: #332E2B;
-  --green: #68a04f;
+  --green: #8DD071;
 }
 
 #backgroundNoise {
@@ -50,8 +50,6 @@ body {
   border: calc((var(--margin)/2)) solid var(--wrapperRed);
   box-shadow: -3px -3px 7px 1px black;
 
-  background-color: var(--white);
-
 
   display: flex;
   flex-direction: column;
@@ -61,6 +59,13 @@ body {
   color: var(--black);
   width: fit-content;
 
+
+  width: fit-content;
+  background: var(--white) url(Hwatu_April_pi_2.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: overlay;
+  background-position: center;
 }
 
 .menu {

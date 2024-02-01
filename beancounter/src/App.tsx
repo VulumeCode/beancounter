@@ -1,4 +1,4 @@
-import {  useState } from "react";
+import { useState } from "react";
 import './App.css';
 
 import bean from './bean.svg'
@@ -82,7 +82,7 @@ function App() {
       <div className="beancounter">
         <div className="menu">
 
-          <button onClick={undo} style={{gridArea: "undo"}}>↩</button>
+          <button onClick={undo} style={{ gridArea: "undo" }}>↩</button>
           {/* <button
             onClick={() => {
               const name = window.prompt("Enter name")
@@ -91,8 +91,8 @@ function App() {
               }
             }}>☰</button> */}
           <button
-            onClick={() => set_isOpen(true)} style={{gridArea: "open"}}>☰</button>
-          <button onClick={redo} style={{gridArea: "redo"}}>↪</button>
+            onClick={() => set_isOpen(true)} style={{ gridArea: "open" }}>☰</button>
+          <button onClick={redo} style={{ gridArea: "redo" }}>↪</button>
         </div>
         <div className="players">
           {
@@ -112,28 +112,28 @@ function App() {
                   player.liable &&
                   <>
                     <div>
-                    <button
-                      className={"liable_mult x2_1" + (player.dups > 0 ? " enabled" : " ")}
-                      onClick={() => set_game((draft) => {
-                        if (player.dups === 0) {
-                          draft.players[i].dups++;
-                        } else {
-                          draft.players[i].dups--;
-                        }
-                      })}>
-                      <CoinDups />
-                    </button></div><div>
-                    <button
-                      className={"liable_mult x2_2" + (player.dups > 1 ? " enabled" : " ")}
-                      onClick={() => set_game((draft) => {
-                        if (player.dups <= 1) {
-                          draft.players[i].dups++;
-                        } else {
-                          draft.players[i].dups--;
-                        }
-                      })}>
-                      <CoinDups />
-                    </button></div>
+                      <button
+                        className={"liable_mult x2_1" + (player.dups > 0 ? " enabled" : " ")}
+                        onClick={() => set_game((draft) => {
+                          if (player.dups === 0) {
+                            draft.players[i].dups++;
+                          } else {
+                            draft.players[i].dups--;
+                          }
+                        })}>
+                        <CoinDups />
+                      </button></div><div>
+                      <button
+                        className={"liable_mult x2_2" + (player.dups > 1 ? " enabled" : " ")}
+                        onClick={() => set_game((draft) => {
+                          if (player.dups <= 1) {
+                            draft.players[i].dups++;
+                          } else {
+                            draft.players[i].dups--;
+                          }
+                        })}>
+                        <CoinDups />
+                      </button></div>
                   </>
                 }
                 {
@@ -192,7 +192,7 @@ function App() {
   );
 }
 
-const CoinPoints = () => <Coin><img src={ bean} alt="" className="bean"/></Coin>
+const CoinPoints = () => <Coin><img src={bean} alt="" className="bean" /></Coin>
 const CoinDups = () => <Coin>×2</Coin>
 
 
