@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import {  useState } from "react";
 import './App.css';
 
 import bean from './bean.svg'
@@ -18,24 +18,6 @@ type Game = {
   redos: Player[][];
   par_score: number;
 }
-
-
-
-const icons = [
-  "https://fudawiki.org/hanafuda/icons/monthicon_1.png",
-  "https://fudawiki.org/hanafuda/icons/monthicon_2.png",
-  "https://fudawiki.org/hanafuda/icons/monthicon_3.png",
-  "https://fudawiki.org/hanafuda/icons/monthicon_4.png",
-  "https://fudawiki.org/hanafuda/icons/monthicon_5.png",
-  "https://fudawiki.org/hanafuda/icons/monthicon_6.png",
-  "https://fudawiki.org/hanafuda/icons/monthicon_7.png",
-  "https://fudawiki.org/hanafuda/icons/monthicon_8.png",
-  "https://fudawiki.org/hanafuda/icons/monthicon_9.png",
-  "https://fudawiki.org/hanafuda/icons/monthicon_10.png",
-  "https://fudawiki.org/hanafuda/icons/monthicon_11.png",
-  "https://fudawiki.org/hanafuda/icons/monthicon_12.png",
-]
-
 
 const makePlayer = (name: string): Player => {
   return {
@@ -118,9 +100,7 @@ function App() {
               <div className="player"
                 key={i}
               >
-                {/* <div className="name">{player.name}: </div> */}
-                <div className="name">
-                  <img alt="" className="icon" src={icons[i % 12]} />: </div>
+                <div className="name">{player.name}: </div>
                 <div className="points">{game.par_score + player.score} <CoinPoints /></div>
                 <div><button
                   className={"liable" + (player.liable ? " enabled" : " ")}
