@@ -82,7 +82,7 @@ function App() {
       <div className="beancounter">
         <div className="menu">
 
-          <button onClick={undo}>↩</button>
+          <button onClick={undo} style={{gridArea: "undo"}}>↩</button>
           {/* <button
             onClick={() => {
               const name = window.prompt("Enter name")
@@ -91,8 +91,8 @@ function App() {
               }
             }}>☰</button> */}
           <button
-            onClick={() => set_isOpen(true)}>☰</button>
-          <button onClick={redo}>↪</button>
+            onClick={() => set_isOpen(true)} style={{gridArea: "open"}}>☰</button>
+          <button onClick={redo} style={{gridArea: "redo"}}>↪</button>
         </div>
         <div className="players">
           {
@@ -102,14 +102,16 @@ function App() {
               >
                 <div className="name">{player.name}: </div>
                 <div className="points">{game.par_score + player.score} <CoinPoints /></div>
-                <div><button
-                  className={"liable" + (player.liable ? " enabled" : " ")}
-                  onClick={() => set_game((draft) => { draft.players[i].liable = !player.liable })}>Lose
-                </button></div>
-
+                <div>
+                  <button
+                    className={"liable" + (player.liable ? " enabled" : " ")}
+                    onClick={() => set_game((draft) => { draft.players[i].liable = !player.liable })}>Lose
+                  </button>
+                </div>
                 {
                   player.liable &&
                   <>
+                    <div>
                     <button
                       className={"liable_mult x2_1" + (player.dups > 0 ? " enabled" : " ")}
                       onClick={() => set_game((draft) => {
@@ -120,7 +122,7 @@ function App() {
                         }
                       })}>
                       <CoinDups />
-                    </button>
+                    </button></div><div>
                     <button
                       className={"liable_mult x2_2" + (player.dups > 1 ? " enabled" : " ")}
                       onClick={() => set_game((draft) => {
@@ -131,13 +133,13 @@ function App() {
                         }
                       })}>
                       <CoinDups />
-                    </button>
+                    </button></div>
                   </>
                 }
                 {
                   !!someoneIsLiable &&
                   !player.liable &&
-                  <button
+                  <div><button
                     className={"pay"}
                     onClick={() => set_game((draft) => {
                       draft.undos.push(game.players);
@@ -157,7 +159,7 @@ function App() {
                     })}
                   >
                     Pay
-                  </button>
+                  </button></div>
                 }
               </div>
             )

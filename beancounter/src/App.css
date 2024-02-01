@@ -13,18 +13,19 @@ body {
 
   text-align: center;
 
-  --purple: #4F3752;
-  --brown: #FEA13C;
-  --yellow: #FCD504;
+  --purple: #a37fad;
+  --brown: #ca7805;
+  --yellow: #a78d00;
   --red: #FD2E3C;
   --white: #F4F4F4;
-  --wrapperRed: #B44A32;
+  --wrapperRed: #b44a32;
   --black: #332E2B;
+  --green: #68a04f;
 }
 
 #backgroundNoise {
   position: absolute;
-  z-index: -1;
+  z-index: -1000;
   background: url(noise.svg);
   background-size: cover;
 }
@@ -45,10 +46,9 @@ body {
 .beancounter {
   --margin: 1.5em;
   margin: var(--margin);
-  height: calc(100vh - (2* var(--margin)));
-
-  outline: calc((var(--margin)/2)) solid var(--wrapperRed);
-  box-shadow: -1px -1px 15px black;
+  height: calc(100vh - (3* var(--margin)));
+  border: calc((var(--margin)/2)) solid var(--wrapperRed);
+  box-shadow: -3px -3px 7px 1px black;
 
   background-color: var(--white);
 
@@ -64,23 +64,43 @@ body {
 }
 
 .menu {
-  display: flex;
-  justify-content: space-evenly;
-  width: 100%;
+
+  display: grid;
+  grid-template-areas: "open ... ... undo redo ";
+  grid-auto-columns: 3em;
+  gap: 0.5em;
+
+  margin-top: 0.5em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  padding: 0.5em;
+  background-color: var(--green);  
+  border: 2pt solid var(--black);
+  outline: 2pt solid var(--green);
 }
 
+
 .player {
+  height: 1.5em;
+  
+  
   display: grid;
-  gap: 0.5em;
   grid-template-areas: "name points b1 b2 b2 ";
   grid-auto-columns: 3em;
-  margin-bottom: 0.5em;
+  gap: 0.5em;
 
-  /* background-color: var(--red); */
+  margin-bottom: 0.5em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  padding: 0.5em;
+  background-color: var(--red);  
+  border: 2pt solid var(--black);
+  outline: 2pt solid var(--red);
 }
 
 .player>.name {
   grid-area: name;
+  justify-self: end;
 }
 
 .icon {
@@ -91,6 +111,7 @@ body {
 
 .player>.points {
   grid-area: points;
+  justify-self: start;
 }
 
 
@@ -102,6 +123,14 @@ body {
     "rst vp vm vs vs"
     "... mp mm ... ...";
   grid-auto-columns: 3em;
+
+  margin-bottom: 0.5em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  padding: 0.5em;
+  background-color: var(--purple);
+  border: 2pt solid var(--black);
+  outline: 2pt solid var(--purple);
 }
 
 /* #pointinput>*{
@@ -140,27 +169,31 @@ body {
 }
 
 button {
-  background: var(--brown);
-  border: none;
+  height: 1.5em;
+  border-radius: 1em 1pt;
   color: var(--black);
+  background: var(--brown);
+  border: 2pt solid var(--black);
+  outline: 2pt solid var(--brown);
+  padding: 0 0.5em;
 }
-
 button.enabled {
-  outline: 2pt solid var(--black);
+  background: var(--green);
+  outline-color: var(--black);
 }
 
 span.coin {
   display: inline-block;
-  height: 1.4em;
-  width: 1.4em;
-  line-height: 1.2em;
+  --diameter: 1.5em;
+    height: var(--diameter);
+  width: var(--diameter);
   border-radius: 50%;
 
-  color: var(--purple);
-  box-shadow: 0 0 0 2pt var(--purple),
-    0 0 0 5pt var(--yellow);
-  /* outline: 2pt solid var(--purple); */
+  color: var(--black);
   background-color: var(--yellow);
+
+  border: 2pt solid var(--black);
+  outline: 2pt solid var(--yellow);
 
   text-align: center;
   font-size: 0.7em;
@@ -170,7 +203,7 @@ span.coin {
 .bean {
   width: 0.9em;
   rotate: -45deg;
-  translate: 0.05em 0.09em;
+  translate: 0.09em 0.14em;
 }
 
 input {
