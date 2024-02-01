@@ -5,7 +5,6 @@ body {
 
 * {
   font-family: 'Iosevka Slab Web', sans-serif;
-  /* font-weight: 800; */
 
   min-width: 0;
   --font-size: calc(10px + 2vmin);
@@ -21,6 +20,8 @@ body {
   --wrapperRed: #b44a32;
   --black: #332E2B;
   --green: #8DD071;
+
+  overflow: visible;
 }
 
 #backgroundNoise {
@@ -90,7 +91,7 @@ body {
   
   
   display: grid;
-  grid-template-areas: "name points b1 b2 b2 ";
+  grid-template-areas: "name points b1 b2 b3 ";
   grid-auto-columns: 3em;
   gap: 0.5em;
 
@@ -138,9 +139,6 @@ body {
   outline: 2pt solid var(--purple);
 }
 
-/* #pointinput>*{
-  width: 3em;
-} */
 #rst {
   grid-area: rst;
 }
@@ -163,6 +161,7 @@ body {
 
 #vs {
   grid-area: vs;
+  justify-self: start;
 }
 
 #mp {

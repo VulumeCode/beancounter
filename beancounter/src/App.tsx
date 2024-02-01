@@ -102,7 +102,8 @@ function App() {
               >
                 <div className="name">{player.name}: </div>
                 <div className="points">{game.par_score + player.score} <CoinPoints /></div>
-                <div>
+                <div
+                  style={{ gridArea: "b1" }}>
                   <button
                     className={"liable" + (player.liable ? " enabled" : " ")}
                     onClick={() => set_game((draft) => { draft.players[i].liable = !player.liable })}>Lose
@@ -111,7 +112,8 @@ function App() {
                 {
                   player.liable &&
                   <>
-                    <div>
+                    <div
+                  style={{ gridArea: "b2" }}>
                       <button
                         className={"liable_mult x2_1" + (player.dups > 0 ? " enabled" : " ")}
                         onClick={() => set_game((draft) => {
@@ -122,7 +124,9 @@ function App() {
                           }
                         })}>
                         <CoinDups />
-                      </button></div><div>
+                      </button></div>
+                    <div
+                  style={{ gridArea: "b3" }}>
                       <button
                         className={"liable_mult x2_2" + (player.dups > 1 ? " enabled" : " ")}
                         onClick={() => set_game((draft) => {
@@ -139,8 +143,9 @@ function App() {
                 {
                   !!someoneIsLiable &&
                   !player.liable &&
-                  <div><button
-                    className={"pay"}
+                  <div 
+                  style={{ gridArea: "b3" }}><button
+                      className={"pay"}
                     onClick={() => set_game((draft) => {
                       draft.undos.push(game.players);
                       draft.redos = [];
