@@ -31,13 +31,17 @@ const makePlayer = (name: string): Player => {
 function App() {
   const [game, set_game] = useImmer<Game>({
     players: [
-      makePlayer("AAA"),
-      makePlayer("BBB"),
-      makePlayer("CCC"),
+      makePlayer("Alice"),
+      makePlayer("Bob"),
+      makePlayer("CharlieCharlie"),
+      makePlayer("David"),
+      makePlayer("Evelin"),
+      makePlayer("Frank"),
+      makePlayer("Grace"),
     ],
     undos: [],
     redos: [],
-    par_score: 88,
+    par_score: -888,
   });
 
   const undo = () => {
@@ -100,71 +104,69 @@ function App() {
               <div className="player"
                 key={i}
               >
-                <div className="name">{player.name}: </div>
-                <div className="points">{game.par_score + player.score} <CoinPoints /></div>
+                <div className="name">{player.name}</div>
+                <div className="points">: {game.par_score + player.score} <CoinPoints /></div>
                 <div
                   style={{ gridArea: "b1" }}>
                   <button
                     className={"liable" + (player.liable ? " enabled" : " ")}
-                    onClick={() => set_game((draft) => { draft.players[i].liable = !player.liable })}>Lose
+                    onClick={() => set_game((draft) => { draft.players[i].liable = !player.liable })}>Loss
                   </button>
                 </div>
                 {
                   player.liable &&
-                  <>
+                  <div style={{ gridArea: "b2" }} className="liable_mult">
                     <div
-                  style={{ gridArea: "b2" }}>
-                      <button
-                        className={"liable_mult x2_1" + (player.dups > 0 ? " enabled" : " ")}
-                        onClick={() => set_game((draft) => {
-                          if (player.dups === 0) {
-                            draft.players[i].dups++;
-                          } else {
-                            draft.players[i].dups--;
-                          }
-                        })}>
-                        <CoinDups />
-                      </button></div>
+                      className={"liable_mult x2_1" + (player.dups > 0 ? " enabled" : " ")}
+                      style={{ gridArea: "b2" }}
+                      onClick={() => set_game((draft) => {
+                        if (player.dups === 0) {
+                          draft.players[i].dups++;
+                        } else {
+                          draft.players[i].dups--;
+                        }
+                      })}>
+                      <CoinDups />
+                    </div>
                     <div
-                  style={{ gridArea: "b3" }}>
-                      <button
-                        className={"liable_mult x2_2" + (player.dups > 1 ? " enabled" : " ")}
-                        onClick={() => set_game((draft) => {
-                          if (player.dups <= 1) {
-                            draft.players[i].dups++;
-                          } else {
-                            draft.players[i].dups--;
-                          }
-                        })}>
-                        <CoinDups />
-                      </button></div>
-                  </>
+                      className={"liable_mult x2_2" + (player.dups > 1 ? " enabled" : " ")}
+                      style={{ gridArea: "b3" }}
+                      onClick={() => set_game((draft) => {
+                        if (player.dups <= 1) {
+                          draft.players[i].dups++;
+                        } else {
+                          draft.players[i].dups--;
+                        }
+                      })}>
+                      <CoinDups />
+                    </div>
+                  </div>
                 }
                 {
                   !!someoneIsLiable &&
                   !player.liable &&
-                  <div 
-                  style={{ gridArea: "b3" }}><button
+                  <div
+                    style={{ gridArea: "b2" }}><button
                       className={"pay"}
-                    onClick={() => set_game((draft) => {
-                      draft.undos.push(game.players);
-                      draft.redos = [];
-                      let gain = 0;
-                      draft.players.forEach(p => {
-                        if (p.liable) {
-                          const loss = score * (2 ** p.dups);
-                          gain += loss;
-                          p.score -= loss;
-                          p.liable = false;
-                          p.dups = 0;
+                      onClick={() => set_game((draft) => {
+                        draft.undos.push(game.players);
+                        draft.redos = [];
+                        let gain = 0;
+                        draft.players.forEach(p => {
+                          if (p.liable) {
+                            const loss = score * (2 ** p.dups);
+                            gain += loss;
+                            p.score -= loss;
+                            p.liable = false;
+                            p.dups = 0;
+                          }
                         }
-                      }
-                      )
-                      draft.players[i].score += gain;
-                    })}
-                  >
-                    Pay
-                  </button></div>
+                        )
+                        draft.players[i].score += gain;
+                      })}
+                    >
+                      Pay
+                    </button></div>
                 }
               </div>
             )

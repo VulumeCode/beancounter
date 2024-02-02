@@ -91,9 +91,8 @@ body {
   
   
   display: grid;
-  grid-template-areas: "name points b1 b2 b3 ";
-  grid-auto-columns: 3em;
-  gap: 0.5em;
+  grid-template-areas: "name points b1 b2";
+  grid-auto-columns: 4em 5em 4em 4em;
 
   margin-bottom: 0.5em;
   margin-left: 0.5em;
@@ -106,7 +105,10 @@ body {
 
 .player>.name {
   grid-area: name;
-  justify-self: end;
+  width: 100%;
+  text-align: end;
+  text-overflow: ellipsis;
+  overflow: clip;
 }
 
 .icon {
@@ -118,6 +120,11 @@ body {
 .player>.points {
   grid-area: points;
   justify-self: start;
+}
+
+.liable_mult {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 
@@ -180,6 +187,7 @@ button {
   border: 2pt solid var(--black);
   outline: 2pt solid var(--brown);
   padding: 0 0.5em;
+  width: 3em;
 }
 button.enabled {
   background: var(--green);
@@ -199,9 +207,11 @@ span.coin {
   border: 2pt solid var(--black);
   outline: 2pt solid var(--yellow);
 
-  text-align: center;
   font-size: 0.7em;
   vertical-align: text-bottom;
+  line-height: 1.5em;
+
+  user-select: none;
 }
 
 .bean {
