@@ -1,5 +1,7 @@
 body {
   margin: 0;
+  --font-size: 2vh;
+  font-size: var(--font-size);
 }
 
 
@@ -7,7 +9,6 @@ body {
   font-family: 'Iosevka Slab Web', sans-serif;
 
   min-width: 0;
-  --font-size: calc(10px + 2vmin);
   font-size: var(--font-size);
 
   text-align: center;
@@ -50,18 +51,16 @@ body {
   height: calc(100vh - (3* var(--margin)));
   border: calc((var(--margin)/2)) solid var(--wrapperRed);
   box-shadow: -3px -3px 7px 1px black;
-
+  
+  width: calc(min(100VW, 50VH));
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  font-size: var(--font-size);
+
   color: var(--black);
-  width: fit-content;
 
-
-  width: fit-content;
   background: var(--white) url(Hwatu_April_pi_2.svg);
   background-repeat: no-repeat;
   background-size: cover;
@@ -70,10 +69,11 @@ body {
 }
 
 .menu {
+  width: stretch;
 
   display: grid;
   grid-template-areas: "open ... ... undo redo ";
-  grid-auto-columns: 3em;
+  grid-auto-columns: 1fr;
   gap: 0.5em;
 
   margin-top: 0.5em;
@@ -85,14 +85,19 @@ body {
   outline: 2pt solid var(--green);
 }
 
-
+.players {
+  width: stretch;
+ 
+}
 .player {
+  
+  width: stretch;
   height: 1.5em;
   
   
   display: grid;
   grid-template-areas: "name points b1 b2";
-  grid-auto-columns: 4em 5em 4em 4em;
+  grid-auto-columns: 4fr 5fr 4fr 4fr;
 
   margin-bottom: 0.5em;
   margin-left: 0.5em;
@@ -114,7 +119,6 @@ body {
 .icon {
   width: var(--font-size);
   object-fit: contain;
-  /* box-shadow: 0 0 0 2pt var(--purple); */
 }
 
 .player>.points {
@@ -129,13 +133,14 @@ body {
 
 
 #pointinput {
+  width: stretch;
   display: grid;
   gap: 0.5em;
   grid-template-areas:
-    "... pp pm ... ..."
-    "rst vp vm vs vs"
-    "... mp mm ... ...";
-  grid-auto-columns: 3em;
+    "... pp pm ..."
+    "rst vp vm vs "
+    "... mp mm ...";
+  grid-auto-columns: 3fr 3fr 3fr 4fr;
 
   margin-bottom: 0.5em;
   margin-left: 0.5em;
@@ -144,6 +149,10 @@ body {
   background-color: var(--purple);
   border: 2pt solid var(--black);
   outline: 2pt solid var(--purple);
+}
+
+#pointinput > * {
+  width: stretch;
 }
 
 #rst {
@@ -187,7 +196,7 @@ button {
   border: 2pt solid var(--black);
   outline: 2pt solid var(--brown);
   padding: 0 0.5em;
-  width: 3em;
+  /* width: 3em; */
 }
 button.enabled {
   background: var(--green);
@@ -197,7 +206,7 @@ button.enabled {
 span.coin {
   display: inline-block;
   --diameter: 1.5em;
-    height: var(--diameter);
+  height: var(--diameter);
   width: var(--diameter);
   border-radius: 50%;
 
@@ -227,5 +236,4 @@ span.coin {
 
 input {
   width: 3em;
-  font-size: var(--font-size);
 }

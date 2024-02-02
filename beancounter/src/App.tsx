@@ -33,15 +33,15 @@ function App() {
     players: [
       makePlayer("Alice"),
       makePlayer("Bob"),
-      makePlayer("CharlieCharlie"),
-      makePlayer("David"),
-      makePlayer("Evelin"),
-      makePlayer("Frank"),
-      makePlayer("Grace"),
+      makePlayer("Charlie"),
+      // makePlayer("David"),
+      // makePlayer("Evelin"),
+      // makePlayer("Frank"),
+      // makePlayer("Grace"),
     ],
     undos: [],
     redos: [],
-    par_score: -888,
+    par_score: 88,
   });
 
   const undo = () => {
@@ -74,7 +74,7 @@ function App() {
   const liables = game.players.filter(p => p.liable);
   const someoneIsLiable = liables.length > 0;
 
-  const [isOpen, set_isOpen] = useState<boolean>(false);
+  const [isMenuOpen, set_isMenuOpen] = useState<boolean>(false);
 
 
   return (
@@ -87,15 +87,8 @@ function App() {
         <div className="menu">
 
           <button onClick={undo} style={{ gridArea: "undo" }}>↩</button>
-          {/* <button
-            onClick={() => {
-              const name = window.prompt("Enter name")
-              if (!!name) {
-                set_game((draft) => { draft.players.push(makePlayer(name)) })
-              }
-            }}>☰</button> */}
           <button
-            onClick={() => set_isOpen(true)} style={{ gridArea: "open" }}>☰</button>
+            onClick={() => set_isMenuOpen(true)} style={{ gridArea: "open" }}>☰</button>
           <button onClick={redo} style={{ gridArea: "redo" }}>↪</button>
         </div>
         <div className="players">
@@ -188,9 +181,9 @@ function App() {
         </div>
       </div>
       <Modal
-        isOpen={isOpen}
+        isOpen={isMenuOpen}
         hasCloseBtn={true}
-        onClose={() => set_isOpen(false)}>
+        onClose={() => set_isMenuOpen(false)}>
         <div>
           blablabla
         </div>
