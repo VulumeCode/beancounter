@@ -214,6 +214,11 @@ span.coin {
   user-select: none;
 }
 
+.disabled span.coin {
+  background-color: transparent;
+  outline-color: transparent;
+}
+
 .bean {
   width: 0.9em;
   rotate: -45deg;

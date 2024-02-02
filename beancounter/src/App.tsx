@@ -117,7 +117,7 @@ function App() {
                   player.liable &&
                   <div style={{ gridArea: "b2" }} className="liable_mult">
                     <div
-                      className={"liable_mult x2_1" + (player.dups > 0 ? " enabled" : " ")}
+                      className={"liable_mult x2_1" + (player.dups > 0 ? " enabled" : " disabled")}
                       style={{ gridArea: "b2" }}
                       onClick={() => set_game((draft) => {
                         if (player.dups === 0) {
@@ -129,11 +129,11 @@ function App() {
                       <CoinDups />
                     </div>
                     <div
-                      className={"liable_mult x2_2" + (player.dups > 1 ? " enabled" : " ")}
+                      className={"liable_mult x2_2" + (player.dups > 1 ? " enabled" : " disabled")}
                       style={{ gridArea: "b3" }}
                       onClick={() => set_game((draft) => {
                         if (player.dups <= 1) {
-                          draft.players[i].dups++;
+                          draft.players[i].dups = 2;
                         } else {
                           draft.players[i].dups--;
                         }
