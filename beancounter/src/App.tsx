@@ -86,10 +86,10 @@ function App() {
       <div className="beancounter">
         <div className="menu">
 
-          <button onClick={undo} style={{ gridArea: "undo" }}>↩</button>
           <button
             onClick={() => set_isMenuOpen(true)} style={{ gridArea: "open" }}>☰</button>
-          <button onClick={redo} style={{ gridArea: "redo" }}>↪</button>
+          <button onClick={undo} style={{ gridArea: "undo" }} disabled={!game.undos.length}>↩</button>
+          <button onClick={redo} style={{ gridArea: "redo" }} disabled={!game.redos.length}>↪</button>
         </div>
         <div className="players">
           {
