@@ -47,13 +47,16 @@ const Modal: React.FC<ModalProps> = ({
   }, [isModalOpen]);
 
   return (
-    <dialog ref={modalRef} onKeyDown={handleKeyDown} className="modal">
-      {hasCloseBtn && (
-        <button className="modal-close-btn" onClick={handleCloseModal}>
-          Save
-        </button>
-      )}
-      {children}
+    <dialog ref={modalRef} onKeyDown={handleKeyDown} className="modal" onClick={(event) => { if (event.target === modalRef.current) { handleCloseModal(); } }}>
+      <div id="modal_dialog">
+        {children}
+        <br/>
+        {hasCloseBtn && (
+          <button className="modal-close-btn" onClick={handleCloseModal}>
+            Close
+          </button>
+        )}
+      </div>
     </dialog>
   );
 };

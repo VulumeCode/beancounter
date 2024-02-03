@@ -34,10 +34,10 @@ function App() {
       makePlayer("Alice"),
       makePlayer("Bob"),
       makePlayer("Charlie"),
-      // makePlayer("David"),
-      // makePlayer("Evelin"),
-      // makePlayer("Frank"),
-      // makePlayer("Grace"),
+      makePlayer(""),
+      makePlayer(""),
+      makePlayer(""),
+      makePlayer(""),
     ],
     undos: [],
     redos: [],
@@ -70,11 +70,12 @@ function App() {
     set_dups(0);
   }
 
+  const players = Object.values(game.players);
   const score = calcScore(points, dups);
-  const liables = game.players.filter(p => p.liable);
+  const liables = players.filter(p => p.liable);
   const someoneIsLiable = liables.length > 0;
 
-  const [isMenuOpen, set_isMenuOpen] = useState<boolean>(true);
+  const [isMenuOpen, set_isMenuOpen] = useState<boolean>(false);
 
 
   return (
@@ -93,7 +94,8 @@ function App() {
         </div>
         <div className="players">
           {
-            game.players.map((player, i) =>
+            players.map((player, i) =>
+              !!player.name &&
               <div className="player"
                 key={i}
               >
@@ -146,7 +148,7 @@ function App() {
                         draft.redos = [];
                         let gain = 0;
                         draft.players.forEach(p => {
-                          if (p.liable) {
+                          if (!!p.name && p.liable) {
                             const loss = score * (2 ** p.dups);
                             gain += loss;
                             p.score -= loss;
@@ -191,19 +193,26 @@ function App() {
             <option>88</option>
             <option>100</option>
           </select><br />
-          <br/>
-          <button>New game</button><br />
           <br />
-          <form id="player_names" onSubmit={(event) => { event.preventDefault() }}>
+          <button onClick={() => window.confirm("New game?") && set_game((draft) => {
+            draft.redos = [];
+            draft.undos = [];
+            draft.players.forEach((p) => {
+              p.dups = 0;
+              p.liable = false;
+              p.score = 0;
+            })
+          })}>New game</button><br />
+          <br />
+          <form id="player_names">
             <label>Player names</label><br />
             {
-              [1, 2, 3, 4, 5, 6, 7].map((_, i) => <>
-                <input type="text" key={i} id={"player_name_"+ i } value={game.players[i]?.name}></input><br />
+              game.players.map((p, i) => <>
+                <input type="text" key={i} id={"player_name_" + i} value={p.name}
+                  onChange={(event) => set_game((draft) => { draft.players[i].name = event.target.value })}></input><br />
               </>)
             }
-            <button type="submit">Save</button>
           </form>
-          
         </div>
       </Modal>
     </div>

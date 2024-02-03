@@ -1,21 +1,22 @@
 .modal {
-  max-width: 20rem;
-  padding: 2rem;
+  border-radius: 1em 1pt;
+
+  max-width: 20em;
   border: 0;
   position: relative;
-  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5rem 0.25rem;
+  box-shadow: hsl(0 0% 0% / 10%) 0 0 0.5em 0.25em;
 
   background-color: var(--white);
   color: var(--black);
+  border: 2pt solid var(--black);
+  outline: 2pt solid var(--white);
+  padding:0;
 }
 
 .modal::backdrop {
   background: hsl(0 0% 0% / 50%);
 }
 
-.modal-close-btn {
-  font-size: 0.75em;
-  position: absolute;
-  top: 0.25em;
-  right: 0.25em;
+#modal_dialog {
+  padding: 2em;
 }
