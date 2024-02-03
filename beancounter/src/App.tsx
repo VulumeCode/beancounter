@@ -31,9 +31,9 @@ const makePlayer = (name: string): Player => {
 function App() {
   const [game, set_game] = useImmer<Game>({
     players: [
-      makePlayer("Alice"),
-      makePlayer("Bob"),
-      makePlayer("Charlie"),
+      makePlayer(""),
+      makePlayer(""),
+      makePlayer(""),
       makePlayer(""),
       makePlayer(""),
       makePlayer(""),
