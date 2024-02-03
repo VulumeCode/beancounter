@@ -184,7 +184,7 @@ function App() {
         isOpen={isMenuOpen}
         hasCloseBtn={true}
         onClose={() => set_isMenuOpen(false)}>
-        <form id="modalMenu">
+        <div id="modalMenu">
           <label htmlFor="par_score">Par score: </label>
           <select name="par_score" value={game.par_score} onChange={(e) => set_game((draft) => { draft.par_score = parseInt(e.target.value) })}>
             <option>0</option>
@@ -193,12 +193,18 @@ function App() {
           </select><br />
           <br/>
           <button>New game</button><br />
-          <br/>
-          <label>Player names</label><br />
-          {
-           [1, 2, 3, 4, 5, 6, 7].map((_, i)=> <><input type="text" value={game.players[i]?.name}></input><br/></>)
-          }
-        </form>
+          <br />
+          <form id="player_names" onSubmit={(event) => { event.preventDefault() }}>
+            <label>Player names</label><br />
+            {
+              [1, 2, 3, 4, 5, 6, 7].map((_, i) => <>
+                <input type="text" key={i} id={"player_name_"+ i } value={game.players[i]?.name}></input><br />
+              </>)
+            }
+            <button type="submit">Save</button>
+          </form>
+          
+        </div>
       </Modal>
     </div>
   );
