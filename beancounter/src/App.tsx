@@ -74,7 +74,7 @@ function App() {
   const liables = game.players.filter(p => p.liable);
   const someoneIsLiable = liables.length > 0;
 
-  const [isMenuOpen, set_isMenuOpen] = useState<boolean>(false);
+  const [isMenuOpen, set_isMenuOpen] = useState<boolean>(true);
 
 
   return (
@@ -184,9 +184,21 @@ function App() {
         isOpen={isMenuOpen}
         hasCloseBtn={true}
         onClose={() => set_isMenuOpen(false)}>
-        <div>
-          blablabla
-        </div>
+        <form id="modalMenu">
+          <label htmlFor="par_score">Par score: </label>
+          <select name="par_score" value={game.par_score} onChange={(e) => set_game((draft) => { draft.par_score = parseInt(e.target.value) })}>
+            <option>0</option>
+            <option>88</option>
+            <option>100</option>
+          </select><br />
+          <br/>
+          <button>New game</button><br />
+          <br/>
+          <label>Player names</label><br />
+          {
+           [1, 2, 3, 4, 5, 6, 7].map((_, i)=> <><input type="text" value={game.players[i]?.name}></input><br/></>)
+          }
+        </form>
       </Modal>
     </div>
   );
