@@ -49,7 +49,7 @@ body {
   --margin: 1.5em;
   margin: var(--margin);
   height: calc(100vh - (3* var(--margin)));
-  border: calc((var(--margin)/2)) solid var(--wrapperRed);
+  border: calc(var(--margin)/2) solid var(--wrapperRed);
   box-shadow: -3px -3px 7px 1px black;
   
   width: calc(min(100VW, 50VH));
