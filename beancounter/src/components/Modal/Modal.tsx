@@ -1,11 +1,11 @@
-import React, { useRef, useEffect, useState } from "react";
-import "./Modal.css";
-//https://github.com/c99rahul/react-modal/tree/main
+import React, { useRef, useEffect, useState } from 'react'
+import './Modal.css'
+// https://github.com/c99rahul/react-modal/tree/main
 interface ModalProps {
-  isOpen: boolean;
-  hasCloseBtn?: boolean;
-  onClose?: () => void;
-  children: React.ReactNode;
+  isOpen: boolean
+  hasCloseBtn?: boolean
+  onClose?: () => void
+  children: React.ReactNode
 };
 
 const Modal: React.FC<ModalProps> = ({
@@ -14,40 +14,40 @@ const Modal: React.FC<ModalProps> = ({
   onClose,
   children
 }) => {
-  const [isModalOpen, setModalOpen] = useState(isOpen);
-  const modalRef = useRef<HTMLDialogElement | null>(null);
+  const [isModalOpen, setModalOpen] = useState(isOpen)
+  const modalRef = useRef<HTMLDialogElement | null>(null)
 
-  const handleCloseModal = () => {
+  const handleCloseModal = (): void => {
     if (onClose) {
-      onClose();
+      onClose()
     }
-    setModalOpen(false);
-  };
+    setModalOpen(false)
+  }
 
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>) => {
-    if (event.key === "Escape") {
-      handleCloseModal();
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDialogElement>): void => {
+    if (event.key === 'Escape') {
+      handleCloseModal()
     }
-  };
+  }
 
   useEffect(() => {
-    setModalOpen(isOpen);
-  }, [isOpen]);
+    setModalOpen(isOpen)
+  }, [isOpen])
 
   useEffect(() => {
-    const modalElement = modalRef.current;
+    const modalElement = modalRef.current
 
     if (modalElement) {
       if (isModalOpen) {
-        modalElement.showModal();
+        modalElement.showModal()
       } else {
-        modalElement.close();
+        modalElement.close()
       }
     }
-  }, [isModalOpen]);
+  }, [isModalOpen])
 
   return (
-    <dialog ref={modalRef} onKeyDown={handleKeyDown} className="modal" onClick={(event) => { if (event.target === modalRef.current) { handleCloseModal(); } }}>
+    <dialog ref={modalRef} onKeyDown={handleKeyDown} className="modal" onClick={(event) => { if (event.target === modalRef.current) { handleCloseModal() } }}>
       <div id="modal_dialog">
         {children}
         <br/>
@@ -58,7 +58,7 @@ const Modal: React.FC<ModalProps> = ({
         )}
       </div>
     </dialog>
-  );
-};
+  )
+}
 
-export default Modal;
+export default Modal
