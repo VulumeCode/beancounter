@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './App.css';
 
 import bean from './bean.svg'
@@ -29,20 +29,44 @@ const makePlayer = (name: string): Player => {
 }
 
 function App() {
-  const [game, set_game] = useImmer<Game>({
-    players: [
-      makePlayer(""),
-      makePlayer(""),
-      makePlayer(""),
-      makePlayer(""),
-      makePlayer(""),
-      makePlayer(""),
-      makePlayer(""),
-    ],
-    undos: [],
-    redos: [],
-    par_score: 88,
-  });
+  const localStorageKey = "beancounter-game";
+  const [isMenuOpen, set_isMenuOpen] = useState<boolean>(false);
+
+  const [game, set_game] = useImmer<Game>(() => {
+    const localStorageValue = localStorage.getItem(localStorageKey);
+    if (localStorageValue == null) {
+      set_isMenuOpen(true);
+      return {
+        players: [
+          makePlayer(""),
+          makePlayer(""),
+          makePlayer(""),
+          makePlayer(""),
+          makePlayer(""),
+          makePlayer(""),
+          makePlayer(""),
+        ],
+        undos: [],
+        redos: [],
+        par_score: 88,
+      }
+    } else {
+      const localStorageGame = JSON.parse(localStorageValue);
+      if (!!localStorageGame) {
+        console.log(localStorageGame.players[0].name)
+        return localStorageGame;
+      }
+    }
+
+  }
+  );
+  
+
+  useEffect(() => {
+    console.log("set")
+    localStorage.setItem(localStorageKey, JSON.stringify(game));
+  }, [game]);
+
 
   const undo = () => {
     set_game((draft) => {
@@ -75,7 +99,6 @@ function App() {
   const liables = players.filter(p => p.liable);
   const someoneIsLiable = liables.length > 0;
 
-  const [isMenuOpen, set_isMenuOpen] = useState<boolean>(false);
 
 
   return (
@@ -97,7 +120,7 @@ function App() {
             players.map((player, i) =>
               !!player.name &&
               <div className="player"
-                key={i}
+                key={"player" + i}
               >
                 <div className="name">{player.name}</div>
                 <div className="points">: {game.par_score + player.score} <CoinPoints /></div>
@@ -207,10 +230,10 @@ function App() {
           <form id="player_names">
             <label>Player names</label><br />
             {
-              game.players.map((p, i) => <>
-                <input type="text" key={i} id={"player_name_" + i} value={p.name}
+              game.players.map((p, i) => <div key={"player_name_" + i} >
+                <input type="text" id={"player_name_" + i} value={p.name}
                   onChange={(event) => set_game((draft) => { draft.players[i].name = event.target.value })}></input><br />
-              </>)
+              </div>)
             }
           </form>
         </div>
