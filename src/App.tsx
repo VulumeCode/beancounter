@@ -17,6 +17,8 @@ interface Game {
   undos: Player[][]
   redos: Player[][]
   par_score: number
+
+  contrast: boolean
 }
 
 const makePlayer = (name: string): Player => {
@@ -48,7 +50,8 @@ function App (): JSX.Element {
         ],
         undos: [],
         redos: [],
-        par_score: 88
+        par_score: 88,
+        contrast: true
       }
     } else {
       const localStorageGame = JSON.parse(localStorageValue)
@@ -97,7 +100,7 @@ function App (): JSX.Element {
   const someoneIsLiable = liables.length > 0
 
   return (
-    <div className="App">
+    <div className={'App' + (game.contrast ? ' contrast' : ' ')}>
       <div id="backgroundNoise">
         <div id="backgroundColor">
         </div>
@@ -239,6 +242,12 @@ function App (): JSX.Element {
               </div>)
             }
           </form>
+          <br />
+          <label htmlFor='contrast'>High contrast: </label>
+          <input type="checkbox" name='contast' checked={game.contrast} onChange={(e) => {
+            console.log(e.target.checked)
+            setGame((draft) => { draft.contrast = e.target.checked })
+          }} />
         </div>
       </Modal>
     </div>

@@ -45,6 +45,13 @@ body {
   display: flex;
 }
 
+.App.contrast{
+  font-weight: 900;
+}
+.contrast button{
+  font-weight: 700;
+}
+
 .beancounter {
   --margin: 1.5em;
   margin: var(--margin);
@@ -108,6 +115,10 @@ body {
   outline: 2pt solid var(--red);
 }
 
+.contrast .player{
+  color: var(--white);
+}
+
 .player>.name {
   grid-area: name;
   width: 100%;
@@ -149,6 +160,10 @@ body {
   background-color: var(--purple);
   border: 2pt solid var(--black);
   outline: 2pt solid var(--purple);
+}
+
+.contrast #pointinput{
+  color: var(--white);
 }
 
 #pointinput > * {
@@ -230,6 +245,10 @@ span.coin {
 .disabled span.coin {
   background-color: transparent;
   outline-color: transparent;
+}
+.contrast .disabled span.coin{
+  color: var(--white);
+  border-color: var(--white  );
 }
 
 .bean {
